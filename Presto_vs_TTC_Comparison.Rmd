@@ -34,16 +34,18 @@ library(here)
 library(knitr)
 library(readr)
 library(janitor)
+library()
 ```
 
 ```{r data, include=FALSE}
-TTC_data <- read_csv(here::here("inputs","data","1985-2019-analysis-of-ridership - 1985-2019 ACTUALS.csv"))
+ttc_data <- read_csv(here::here("inputs","data","1985-2019-analysis-of-ridership - 1985-2019 ACTUALS.csv"))
 ```
 
 ```{r clean-data, include=FALSE}
-TTC_clean_data <-
-  janitor::clean_names(TTC_data) %>%
+ttc_clean_data <-
+  janitor::clean_names(ttc_data) %>%
   select(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13)
+#ttc_clean_data[is.na(ttc_clean_data)] = 0 
 ```
 
 ## Introduction
@@ -56,6 +58,16 @@ The study focused on assessing the total number of sales for PRESTO, a digital p
 ## Data
 
 ## Model
+
+```{r multiple-regression-model, include=TRUE}
+ttc_vs_presto_model <- 
+  lm(x2 ~ x3 + x4, 
+     data = ttc_clean_data)
+summary(ttc_vs_presto_model)
+```
+
+
+
 
 ## Results
 
