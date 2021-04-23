@@ -1,0 +1,46 @@
+---
+title: The Rise of PRESTO Positively Impacts the Usage of the TTC for the Residents
+  of Toronto
+author: "Rachit Srivastava"
+date: "April 23rd, 2021"
+thanks: "Code and data are available at: https://github.com/levi24/PRESTO_VS_TTC"
+output:
+  pdf_document: default
+  html_document: default
+abstract: With the rapid increase in digital commodities and on-the-go customer experiences
+  for TTC (Toronto Transit Commission) Transit riders, a study was conducted to see
+  the shift in transit fare sales in the past decade between physical fares (i.e.
+  cash, tokens, or passes) and digital fares from PRESTO cards. When looking at the
+  TTC sales matrix from year to year, there is an increase in usage of the TTC where
+  most of the sales derive directly from the PRESTO sales rather than physical fares
+  regardless of the type of fare; whether the fare pertains to a single-fare ticket
+  or monthly passes. Similarly, the relationship between PRESTO sales and the sales
+  for rail transits, like subway and SRT, perceived a positive increase in usage in
+  the past decade, alluding to the riders being more interested in using the TTC for
+  a more faster and efficient ride experience around Toronto. It is quite evident
+  that Torontonians value the explicit interaction of being efficient and quick when
+  it comes to using the TTC, by using this insight the TTC can slowly transition into
+  using PRESTO as their main source of selling fares while increasing the development
+  of subways to cater to the needs of Toronto’s TTC riders.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+There has been a rise of TTC fares and the usage of the TTC transit by Torontonians in the past decade, giving rise to contactless smart cards encrypted with NFC called the PRESTO card which allows riders to use the TTC without the need for any physical fares. PRESTO is a payment system that works across the city of Toronto for all transit systems to make the experience of a rider more secure and convenient to help them commute from one place to another. While TTC is one of the main ways for people to commute and travel across the city, it will be great to see what aspects of TTC are more prevalent in Torontonian’s riding experience. This will help hone onto a specific sector of TTC and help improve the experience further to lessen the pain for the TTC riders. 
+
+The study focused on assessing the total number of sales for PRESTO, a digital payment system for quick fares, and total number of sales for physical fares, like cash, tokens, passes, or tickets, for Torontonians from 2010 - 2020. This study was conducted by looking at a TTC dataset obtained from the Toronto Open Data Portal, that focused on illustrating the information about the sales of the fares for both digital and physical assets as well as distinguishing the amount of fares for the types of transits that TTC offers. Since the study aimed to look into the trajectory of the sales from a large period of time, looking at the characteristics of the total number of sales per year seemed to be the most appropriate data to analyze for this study. By visualizing this data over a period of time, it gives us a great sense of how the ticket sales increased or decreased in a specific portion of the TTC ecosystem while identifying the main reasoning for that relationship. When comparing these variables, it shows that there is an increase in the usage of the TTC from 2010 to 2020, where the majority of those sales came from PRESTO sales and Rail transit sales. This further elaborates on the behaviour of Torontonians while using the TTC service and its products as they are more inclined to take a type of transit that is convenient, fast, efficient, and gets them to their destination without any hiccups. The TTC can use this knowledge to further push their agenda in strengthening that specific sector in their roadmap to improve the experience further so TTC riders continue to utilize their services according to their liking. 
+
+
+
+## Data
+
+## Model
+
+## Results
+
+## Discussion
+
+## References
