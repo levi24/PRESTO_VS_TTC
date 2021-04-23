@@ -44,10 +44,23 @@ ttc_data <- read_csv(here::here("inputs","data","1985-2019-analysis-of-ridership
 ```{r clean-data, include=FALSE}
 ttc_clean_data <-
   janitor::clean_names(ttc_data) %>%
-  select(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13)
-#ttc_clean_data[is.na(ttc_clean_data)] = 0 
+  select(x1,fare_media_=,x2019,x2018,x2017,x2016,x2015,x2014,x2013,x2012,x2011,x2010,x2009)
+
+ttc_clean_data[ttc_clean_data == "N/A"] <- "0"
 ```
 
+###ttc_clean_data[x2019 == "N/A",
+                 x2018 == "N/A",
+                 x2017 == "N/A",
+                 x2016 == "N/A",
+                 x2015 == "N/A",
+                 x2014 == "N/A",
+                 x2013 == "N/A",
+                 x2012 == "N/A",
+                 x2011 == "N/A",
+                 x2010 == "N/A",
+                 x2009 == "N/A"] <- "0"
+                 
 ## Introduction
 There has been a rise of TTC fares and the usage of the TTC transit by Torontonians in the past decade, giving rise to contactless smart cards encrypted with NFC called the PRESTO card which allows riders to use the TTC without the need for any physical fares. PRESTO is a payment system that works across the city of Toronto for all transit systems to make the experience of a rider more secure and convenient to help them commute from one place to another. While TTC is one of the main ways for people to commute and travel across the city, it will be great to see what aspects of TTC are more prevalent in Torontonian’s riding experience. This will help hone onto a specific sector of TTC and help improve the experience further to lessen the pain for the TTC riders. 
 
