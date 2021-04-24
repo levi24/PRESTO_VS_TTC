@@ -36,6 +36,7 @@ library(readr)
 library(janitor)
 library(huxtable)
 library(dplyr)
+library(kableExtra)
 ```
 
 ```{r data, include=FALSE}
@@ -67,9 +68,7 @@ presto_vs_ttc <-
 ## Introduction
 There has been a rise of TTC fares and the usage of the TTC transit by Torontonians in the past decade, giving rise to contactless smart cards encrypted with NFC called the PRESTO card which allows riders to use the TTC without the need for any physical fares. PRESTO is a payment system that works across the city of Toronto for all transit systems to make the experience of a rider more secure and convenient to help them commute from one place to another. While TTC is one of the main ways for people to commute and travel across the city, it will be great to see what aspects of TTC are more prevalent in Torontonian’s riding experience. This will help hone onto a specific sector of TTC and help improve the experience further to lessen the pain for the TTC riders. 
 
-The study focused on assessing the total number of sales for PRESTO, a digital payment system for quick fares, and total number of sales for physical fares, like cash, tokens, passes, or tickets, for Torontonians from 2010 - 2020. This study was conducted by looking at a TTC dataset obtained from the Toronto Open Data Portal, that focused on illustrating the information about the sales of the fares for both digital and physical assets as well as distinguishing the amount of fares for the types of transits that TTC offers. Since the study aimed to look into the trajectory of the sales from a large period of time, looking at the characteristics of the total number of sales per year seemed to be the most appropriate data to analyze for this study. By visualizing this data over a period of time, it gives us a great sense of how the ticket sales increased or decreased in a specific portion of the TTC ecosystem while identifying the main reasoning for that relationship. When comparing these variables, it shows that there is an increase in the usage of the TTC from 2010 to 2020, where the majority of those sales came from PRESTO sales and Rail transit sales. This further elaborates on the behaviour of Torontonians while using the TTC service and its products as they are more inclined to take a type of transit that is convenient, fast, efficient, and gets them to their destination without any hiccups. The TTC can use this knowledge to further push their agenda in strengthening that specific sector in their roadmap to improve the experience further so TTC riders continue to utilize their services according to their liking. 
-
-
+The study focused on assessing the total number of sales for PRESTO, a digital payment system for quick fares, and total number of sales for physical fares, like cash, tokens, passes, or tickets, for Torontonians from 2009 - 2019. This study was conducted by looking at a TTC dataset obtained from the Toronto Open Data Portal, that focused on illustrating the information about the sales of the fares for both digital and physical assets as well as distinguishing the amount of fares for the types of transits that TTC offers. Since the study aimed to look into the trajectory of the sales from a large period of time, looking at the characteristics of the total number of sales per year seemed to be the most appropriate data to analyze for this study. By visualizing this data over a period of time, it gives us a great sense of how the ticket sales increased or decreased in a specific portion of the TTC ecosystem while identifying the main reasoning for that relationship. When comparing these variables, it shows that there is an increase in the usage of the TTC from 2009 - 2019, where the majority of those sales came from PRESTO sales and Rail transit sales. This further elaborates on the behaviour of Torontonians while using the TTC service and its products as they are more inclined to take a type of transit that is convenient, fast, efficient, and gets them to their destination without any hiccups. The TTC can use this knowledge to further push their agenda in strengthening that specific sector in their roadmap to improve the experience further so TTC riders continue to utilize their services according to their liking. 
 
 ## Data
 
@@ -82,21 +81,7 @@ The study focused on assessing the total number of sales for PRESTO, a digital p
 ```
 
 ```{r table1, echo=FALSE}
-dffare <- data.frame(
-  fare = presto_vs_ttc$fare_media,
-  twenty_nineteen = presto_vs_ttc$x2019,
-  twenty_eighteen = presto_vs_ttc$x2018,
-  twenty_seventeen = presto_vs_ttc$x2017,
-  twenty_sixteen = presto_vs_ttc$x2016,
-  twenty_fifteen = presto_vs_ttc$x2015,
-  twenty_fourteen = presto_vs_ttc$x2014,
-  twenty_thirteen = presto_vs_ttc$x2013,
-  twenty_twelve = presto_vs_ttc$x2012,
-  twenty_eleven = presto_vs_ttc$x2011,
-  twenty_ten = presto_vs_ttc$x2010,
-  two_thousand_nine = presto_vs_ttc$x2009
-)
-knitr::kable(dffare, 
+knitr::kable(presto_vs_ttc, 
              "simple",
              col.names = c("Type of Fare", 
                            "2019", 
@@ -111,9 +96,11 @@ knitr::kable(dffare,
                            "2010",
                            "2009"),
              align = c("l","l","l","l","l","l","l","l","l","l","l","r"),
-             caption = "Population in Toronto Based on Age",
-             )#%>%
-  #aggregate(twenty_nineteen ~ fare, data = dffare, FUN = sum, na.rm = FALSE)
+             caption = "Total Number of People Using PRESTO and TTC",
+             )%>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1, width="10em")%>%
+  kable_styling(full_width = F, latex_options = "scale_down")
 ```
 
 
@@ -123,3 +110,22 @@ knitr::kable(dffare,
 ## Discussion
 
 ## References
+
+##Appendix
+dffare <- data.frame(
+  fare = presto_vs_ttc$fare_media,
+  twenty_nineteen = presto_vs_ttc$x2019,
+  twenty_eighteen = presto_vs_ttc$x2018,
+  twenty_seventeen = presto_vs_ttc$x2017,
+  twenty_sixteen = presto_vs_ttc$x2016,
+  twenty_fifteen = presto_vs_ttc$x2015,
+  twenty_fourteen = presto_vs_ttc$x2014,
+  twenty_thirteen = presto_vs_ttc$x2013,
+  twenty_twelve = presto_vs_ttc$x2012,
+  twenty_eleven = presto_vs_ttc$x2011,
+  twenty_ten = presto_vs_ttc$x2010,
+  two_thousand_nine = presto_vs_ttc$x2009
+) %>%
+  with(dffare, sum(twenty_nineteen[fare == 'CASH']))
+
+dffare
