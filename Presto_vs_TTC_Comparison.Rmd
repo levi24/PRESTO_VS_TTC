@@ -78,12 +78,12 @@ presto_vs_ttc <-
          )
 ```
 
-## Introduction
+# Introduction
 There has been a rise of TTC fares and the usage of the TTC transit by Torontonians in the past decade, giving rise to contactless smart cards encrypted with NFC called the PRESTO card which allows riders to use the TTC without the need for any physical fares. PRESTO is a payment system that works across the city of Toronto for all transit systems to make the experience of a rider more secure and convenient to help them commute from one place to another. While TTC is one of the main ways for people to commute and travel across the city, it will be great to see what aspects of TTC are more prevalent in Torontonian’s riding experience. This will help hone onto a specific sector of TTC and help improve the experience further to lessen the pain for the TTC riders. 
 
 The study focused on assessing the total number of sales for PRESTO, a digital payment system for quick fares, and total number of sales for physical fares, like cash, tokens, passes, or tickets, for Torontonians from 2009 - 2019. This study was conducted by looking at a TTC dataset obtained from the Toronto Open Data Portal, that focused on illustrating the information about the sales of the fares for both digital and physical assets as well as distinguishing the amount of fares for the types of transits that TTC offers. Since the study aimed to look into the trajectory of the sales from a large period of time, looking at the characteristics of the total number of sales per year seemed to be the most appropriate data to analyze for this study. By visualizing this data over a period of time, it gives us a great sense of how the ticket sales increased or decreased in a specific portion of the TTC ecosystem while identifying the main reasoning for that relationship. When comparing these variables, it shows that there is an increase in the usage of the TTC from 2009 - 2019, where the majority of those sales came from PRESTO sales and Rail transit sales. This further elaborates on the behaviour of Torontonians while using the TTC service and its products as they are more inclined to take a type of transit that is convenient, fast, efficient, and gets them to their destination without any hiccups. The TTC can use this knowledge to further push their agenda in strengthening that specific sector in their roadmap to improve the experience further so TTC riders continue to utilize their services according to their liking. 
 
-## Data
+# Data
 The data discussed in this paper is extracted from the opendatatoronto portal and has been captured from 1985 to 2019. The matrix ecompasses the total number of TTC rides that a Torontotonian has made in all of those years, where the numbers detailed in each column is the total number of rides for that year under that specific “ride” category. The dataset has a wide variety of data like: 
 
 • type of fare(PRESTO, cash, tokens, tickets, passes, etc.), \
@@ -108,7 +108,7 @@ The paper will ignore the data around most of these types of fares except for th
 
 Lastly, the data that is presented in the dataset separates the different types of fares by age group (adult, senior, and youth). In order to see the full trajectory and comparison between the digital and physical fares of TTC in the past/recent decade, the data will need to be aggregated at the end to see a more visually accurate comparison of the types of fares.
 
-## Results
+# Results
 
 Based on the testing that was done as part of this paper by looking at the dataset for the TTC usage from 2009-2019, there could be a lot that can be derived from the tables and the charts detailed below. Some of these results include:
 
@@ -171,13 +171,30 @@ ggplot(presto_vs_ttc, aes(x="", y = x2009, fill = fare_media)) +
 ```
 
 
-## Discussion
+# Discussion
 
-## References
+## Final Takeaways
+This study looked at the data for TTC fare sales from 2009 to 2019 and analyzed the trajectory of the sales through the type of fares indicated in the dataset. Based on the results detailed above, it can be derived that the sales of physical TTC fares have decreased throughout the years and the digital fares have experienced a rise as the digital technology matures year-to-year. Through the data it can be seen that Torontonians have gotten a slow but surely   adoption to the new ways of commuting across Toronto using the ‘tap and go’ method of transportation through PRESTO technology. While the adoption of this was quite low when it was first released, as you can see from the results displayed in this paper, as years went on the usage of physical fares have decreased and the digital fares have increased. This result is to the point where digital sales have out-grown the sales of physical sales from a decade ago in shear numbers alone. 
 
-## Appendix
+In the last decade, there was an increase of 20 Million sales for digital as compared to the sales in 2019 for physical shares. There could be a lot of reasons why this could be the case for the TTC. This insight can be conveyed through the large amount of usage of the TTC in the most recent year as people are using the TTC more often as it is more convenient. With the use of PRESTO, users can automatically load amounts on their card, can use their PRESTO card without the need of having multiple types of fares but only need to keep track of one card that they can use, and make more frequent trips back and forth without keeping track of their ticket in any shape or form. It could also be a result of Toronto's population in the recent years as it has increased since 2009. Regardless the increase of digital sales have impacted both Torontonians and the TTC is a positive manner as the sales continue to rise from year-to-year and will continue to grow for years to come. 
 
-Below is a list of pie charts for the other years if you want to see a more detailed view on all the years in between. 
+## What We Learned
+Based on the key takeaways, we can tell that Torontonians are heading towards a more digital and convenient way to commute across the city in the upcoming years. With the data seen in this paper, it is evident that people’s primary way of using the TTC is through PRESTO and physical fares have become a secondary method of commuting on the TTC. It seems like that people need to use the physical fares in other circumstances other than the norm of taking the TTC from one location to another. The usage of physical fares is seen as a minority use case for people who have yet to fully transition over to the digital way of commuting or can be used as an alternate method of payment for when they do not have the PRESTO card on them. This could be due to them misplacing their card, expiration of their old card, or they may have damaged their card in any sort of way. 
+
+Using this data, TTC can look into other alternate methods of improving the experience of PRESTO technology to make it even more convenient for TTC users in commuting across the city with the TTC. This could mean that they start including alternate methods of when people are not using the PRESTO cards, like misplacement of their card or other use cases. For instance, TTC can now look into adding people’s PRESTO cards to their digital wallets so that they can use their phones or watch to “tap” onto a TTC terminal to pay for their fares. This could be a huge step for the TTC in encouraging more people to adopt the digital fares of PRESTO, which will result in a more exponential increase of sales for the digital fares in the next decade to come.
+
+## Next Steps
+This paper looked at the different types of fares that TTC riders use from a year to year basis but it fails to look at an aggregated view of all of the fares that Torontonians use on a daily basis. It would have been nice to see a linear regression of data from all of the years on one graph or model for each type of fare and see the relationship for the data for all of the years for both physical and digital fares. This was the initial intention of the paper but was lost as the regression model became more and more complicated with the dataset that was used from opendatatoronto. By doing that, there could have been a more accurate representation of the data that is clearly visible through the data table and pie charts in the paper but is lacking the visible trajectory that anyone can easily glance and notice the change in the years. 
+
+Also, moving forward it will be interesting to see what TTC introduces to the Toronto public in terms of either fares and see if this trajectory of digital fares tends to increase in the upcoming years. However, I am assuming that TTC sales have noticed a natural decline in sales due to the recent pandemic and will continue to see a decrease in sales until the pandemic is over. Once the pandemic is over, it can be assumed that people will start using more and more digital fares as compared to physical fares as we have seen an increase in distancing with human contact during the pandemic. So it feels like the PRESTO sales will continue to increase once the pandemic is over or may even notice a huge influx of sales due to the convenience of digital fares.
+
+
+# References
+
+# Appendix
+
+## All Pie Charts (2010 - 2018)
+Below is a list of pie charts for the other years if you want to see a more detailed view on all the years in between. Starting from 2018 to 2010.
 
 
 ```{r pie-chart-2018, echo=FALSE}
