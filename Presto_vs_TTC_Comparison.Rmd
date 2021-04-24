@@ -27,6 +27,7 @@ abstract: With the rapid increase in digital commodities and on-the-go customer 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 ```{r library, include=FALSE}
 #install.packages("opendatatoronto")
 library(opendatatoronto)
@@ -37,6 +38,9 @@ library(janitor)
 library(huxtable)
 library(dplyr)
 library(kableExtra)
+library(ggplot2)
+library(plyr)
+#library(gridExtra)
 ```
 
 ```{r data, include=FALSE}
@@ -54,17 +58,18 @@ ttc_clean_data[ttc_clean_data == "N/A"] <- "0"
 ```{r data-for-paper, include=FALSE}
 presto_vs_ttc <- 
   ttc_clean_data %>%
-  filter(fare_media %in% c("PRESTO - ADULT SINGLE RIDE",
-                           "CASH",
+  #sort(colnames(ttc_clean_data$fare_media)) %>% Comments: Wanted to sort the table alphabetically so that the reader can see all of the similar data together. This would also allow for the charts to also show coherent comparisons. 
+  filter(fare_media %in% c("CASH",
                            "TOKENS",
                            "TICKETS",
+                           "PRESTO - ADULT SINGLE RIDE",
                            "PRESTO - SENIOR SINGLE RIDE",
                            "PRESTO - YOUTH SINGLE RIDE",
                            "PRESTO - FREE CHILD RIDE"
                                )
          )
 ```
-                 
+
 ## Introduction
 There has been a rise of TTC fares and the usage of the TTC transit by Torontonians in the past decade, giving rise to contactless smart cards encrypted with NFC called the PRESTO card which allows riders to use the TTC without the need for any physical fares. PRESTO is a payment system that works across the city of Toronto for all transit systems to make the experience of a rider more secure and convenient to help them commute from one place to another. While TTC is one of the main ways for people to commute and travel across the city, it will be great to see what aspects of TTC are more prevalent in Torontonian’s riding experience. This will help hone onto a specific sector of TTC and help improve the experience further to lessen the pain for the TTC riders. 
 
@@ -95,17 +100,11 @@ The paper will ignore the data around most of these types of fares except for th
 
 Lastly, the data that is presented in the dataset separates the different types of fares by age group (adult, senior, and youth). In order to see the full trajectory and comparison between the digital and physical fares of TTC in the past/recent decade, the data will need to be aggregated at the end to see a more visually accurate comparison of the types of fares.
 
-## Model
 
-```{r multiple-regression-model, include=TRUE}
-#ttc_vs_presto_model <- 
- # lm(x2019 ~ x1 + fare_media, data = ttc_clean_data)
-#summary(ttc_vs_presto_model)
-```
-
+## Results
 ```{r table1, echo=FALSE}
 knitr::kable(presto_vs_ttc, 
-             "simple",
+             "latex", booktabs = T, 
              col.names = c("Type of Fare", 
                            "2019", 
                            "2018", 
@@ -120,35 +119,184 @@ knitr::kable(presto_vs_ttc,
                            "2009"),
              align = c("l","l","l","l","l","l","l","l","l","l","l","r"),
              caption = "Total Number of People Using PRESTO and TTC",
-             )%>%
-  row_spec(0,bold=TRUE) %>%
-  column_spec(1, width="10em")%>%
-  kable_styling(full_width = F, latex_options = "scale_down")
+             ) %>%
+  row_spec(0,bold=TRUE) %>% 
+  kable_styling(full_width = F, latex_options = c("striped", "scale_down"))
 ```
 
+```{r pie-chart-2019, echo=FALSE}
+#Wanted to show a visual representation of the different types of fares in total for the most recent year in question (2019). Inside the pie chart, I wanted to show a percentage of data or the name of the type of fare on the pie chart but it did not work. To make it less confusing, I ended up making a more clear difference in the colours of the data.
+ggplot(presto_vs_ttc, aes(x="", y = x2019, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2019") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
 
+```{r pie-chart-2009, echo=FALSE}
+#Shows the total TTC fares in the year 2009
+ggplot(presto_vs_ttc, aes(x="", y = x2009, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2009") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
 
-## Results
 
 ## Discussion
 
 ## References
 
-##Appendix
-dffare <- data.frame(
-  fare = presto_vs_ttc$fare_media,
-  twenty_nineteen = presto_vs_ttc$x2019,
-  twenty_eighteen = presto_vs_ttc$x2018,
-  twenty_seventeen = presto_vs_ttc$x2017,
-  twenty_sixteen = presto_vs_ttc$x2016,
-  twenty_fifteen = presto_vs_ttc$x2015,
-  twenty_fourteen = presto_vs_ttc$x2014,
-  twenty_thirteen = presto_vs_ttc$x2013,
-  twenty_twelve = presto_vs_ttc$x2012,
-  twenty_eleven = presto_vs_ttc$x2011,
-  twenty_ten = presto_vs_ttc$x2010,
-  two_thousand_nine = presto_vs_ttc$x2009
-) %>%
-  with(dffare, sum(twenty_nineteen[fare == 'CASH']))
+## Appendix
 
-dffare
+Below is a list of pie charts for the other years if you want to see a more detailed view on all the years in between. 
+
+
+```{r pie-chart-2018, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2018, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2018") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2017, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2017, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2017") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2016, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2016, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2016") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2015, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2015, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2015") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2014, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2014, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2014") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2013, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2013, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2013") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2012, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2012, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2012") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2011, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2011, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2011") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+```{r pie-chart-2010, echo=FALSE}
+ggplot(presto_vs_ttc, aes(x="", y = x2010, fill = fare_media)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values=c("#f58231", "#55DDE0", "#ffe119", "#911eb4", "#4363d8", "#e6194B", "#3cb44b")) +
+  geom_text(aes(x=1.6, label = fare_media), color = "black", size=2, position = position_stack(vjust = 0.5)) + 
+  labs(fill = NULL, title = "TTC Fare Breakdown - 2010") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme_void() 
+```
+
+
+## Code that did not work
+
+Below is all of the code that I tried but did not work or failed to comply in any shape or form. Also, these codes were not the only ones that did not work but wanted to show you that I tried. There were others I forgot to document...
+
+
+```{r pie-comparison}
+#I combined all pie charts to show the most drastic change in the decade from the most recent year to the oldest year in question of the study.
+#grid.arrange(pie2019, pie2018, pie2017, pie2016, pie2015, pie2014, pie2013, pie2012, pie2011, pie2010, pie2009)
+#Combining did not work.
+```
+
+
+```{r calculations}
+#I GIVE UP! I spent days in combining the data for cash, tickets, and tokens together and I just cannot get it to work. The intention was to combine the strings of data into one row of data to easily visualize and compare between the different types of fares and the years. Without combining the data together, the numbers for each fare is out of order and not in chronological/alphabetical/categorical order.
+#dffare <- data.frame(
+  #fare = presto_vs_ttc$fare_media,
+  #twenty_nineteen = strtoi(c(presto_vs_ttc$x2019)),
+  #twenty_eighteen = strtoi(presto_vs_ttc$x2018),
+  #twenty_seventeen = strtoi(presto_vs_ttc$x2017),
+  #twenty_sixteen = strtoi(presto_vs_ttc$x2016),
+  #twenty_fifteen = strtoi(presto_vs_ttc$x2015),
+  #twenty_fourteen = strtoi(presto_vs_ttc$x2014),
+  #twenty_thirteen = strtoi(presto_vs_ttc$x2013),
+  #twenty_twelve = strtoi(presto_vs_ttc$x2012),
+  #twenty_eleven = strtoi(presto_vs_ttc$x2011),
+  #twenty_ten = strtoi(presto_vs_ttc$x2010),
+  #two_thousand_nine = strtoi(presto_vs_ttc$x2009)
+#) 
+#ddply(dffare,"fare",numcolwise(sum))
+#new_dffare <- 
+  #dffare %>% 
+  #group_by(fare) %>% 
+  #summarise(twenty_nineteen = sum(twenty_nineteen))
+```
+
+```{r multiple-regression-model}
+#ttc_vs_presto_model <- 
+ # lm(x2019 ~ x1 + fare_media, data = ttc_clean_data)
+#summary(ttc_vs_presto_model)
+```
+
+
