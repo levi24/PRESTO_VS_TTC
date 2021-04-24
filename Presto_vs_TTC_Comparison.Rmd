@@ -71,6 +71,29 @@ There has been a rise of TTC fares and the usage of the TTC transit by Torontoni
 The study focused on assessing the total number of sales for PRESTO, a digital payment system for quick fares, and total number of sales for physical fares, like cash, tokens, passes, or tickets, for Torontonians from 2009 - 2019. This study was conducted by looking at a TTC dataset obtained from the Toronto Open Data Portal, that focused on illustrating the information about the sales of the fares for both digital and physical assets as well as distinguishing the amount of fares for the types of transits that TTC offers. Since the study aimed to look into the trajectory of the sales from a large period of time, looking at the characteristics of the total number of sales per year seemed to be the most appropriate data to analyze for this study. By visualizing this data over a period of time, it gives us a great sense of how the ticket sales increased or decreased in a specific portion of the TTC ecosystem while identifying the main reasoning for that relationship. When comparing these variables, it shows that there is an increase in the usage of the TTC from 2009 - 2019, where the majority of those sales came from PRESTO sales and Rail transit sales. This further elaborates on the behaviour of Torontonians while using the TTC service and its products as they are more inclined to take a type of transit that is convenient, fast, efficient, and gets them to their destination without any hiccups. The TTC can use this knowledge to further push their agenda in strengthening that specific sector in their roadmap to improve the experience further so TTC riders continue to utilize their services according to their liking. 
 
 ## Data
+The data discussed in this paper is extracted from the opendatatoronto portal and has been captured from 1985 to 2019. The matrix ecompasses the total number of TTC rides that a Torontotonian has made in all of those years, where the numbers detailed in each column is the total number of rides for that year under that specific “ride” category. The dataset has a wide variety of data like: 
+
+• type of fare(PRESTO, cash, tokens, tickets, passes, etc.), \
+• type of transit(subway, bus, and rail), \
+• age group (adult, senior, and youth), \
+• and the time of the ride (weekday or weekends).
+
+For the purpose of this study, the data that is being manipulated in this study is to look at the trajectory of the type of fares that Torontonians have used in the past/recent decade (2009 - 2019). As well as look at the total amount of rides per category based on the age group as the total numbers for the types of fares have been divided up by the age group specifically. Hence, in order to learn the true trajectory of all Torontonians and the data provided around the usage of the TTC, we will need to look at the total usage of the transit system for every single age group. 
+
+Moreover, the dataset has many other breakdowns when the variable for the types of fares is concerned. The dataset is filled with numbers around the wide variety of services that TTC offers to their customers as there are a lot of ways a person can use the TTC. To further elaborate, the dataset contains data on:
+
+• single ride fare,\
+• two-time fare (back and forth rides),\
+• monthly passes, \
+• weekly passes, \
+• post-secondary passes,\
+• two hour rides, \
+• free rides,\
+• and many others
+
+The paper will ignore the data around most of these types of fares except for the single fare ticket sales for the TTC in general. This accounts for both PRESTO fares and physical TTC fares like: cash, tokens, and tickets, where the physical fares like the two-time fares and the different types of passes will be ignored for this study. Also, another thing to note is that the total number of fares listed in the dataset is listed in the thousandths value. In other words, some data in the csv file is listed in single or double digits but that does not mean that there were less than 10 types of sales for that specific category of fares for the year. Instead, it means that there were less than 10,000 sales for that specific type of sale for that year. This could be the case due to a new service being adopted by the city or a late adoption of that service in the year which could have caused such an outlier in the data. 
+
+Lastly, the data that is presented in the dataset separates the different types of fares by age group (adult, senior, and youth). In order to see the full trajectory and comparison between the digital and physical fares of TTC in the past/recent decade, the data will need to be aggregated at the end to see a more visually accurate comparison of the types of fares.
 
 ## Model
 
