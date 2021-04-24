@@ -156,6 +156,8 @@ ggplot(presto_vs_ttc, aes(x="", y = x2019, fill = fare_media)) +
   theme_void() 
 ```
 
+Figure 1 illustrates the total number of TTC fares in 2019, where you can easily see that physical fares are still relevant, the digital fares or PRESTO make up the majority of the graph. In particular, the sales of PRESTO have reached over 50% of the sales and holds the majority of the sales through digital sales. Conversely, Figure 2 illustrates the opposite where more than 75% of the TTC sales are held by the physical TTC fares. Red and Orange colours in the pie chart make up most of the sales within the chart which are represented by both cash and tickets as the type of fares mostly used by Torontonians in 2009. 
+
 ```{r pie-chart-2009, echo=FALSE, fig.cap="The figure shows the breakdown of the different types of TTC fares in the year 2009"}
 #Shows the total TTC fares in the year 2009
 ggplot(presto_vs_ttc, aes(x="", y = x2009, fill = fare_media)) +
