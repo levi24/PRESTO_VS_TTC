@@ -34,7 +34,8 @@ library(here)
 library(knitr)
 library(readr)
 library(janitor)
-library()
+library(huxtable)
+library(dplyr)
 ```
 
 ```{r data, include=FALSE}
@@ -44,22 +45,24 @@ ttc_data <- read_csv(here::here("inputs","data","1985-2019-analysis-of-ridership
 ```{r clean-data, include=FALSE}
 ttc_clean_data <-
   janitor::clean_names(ttc_data) %>%
-  select(x1,fare_media_=,x2019,x2018,x2017,x2016,x2015,x2014,x2013,x2012,x2011,x2010,x2009)
+  select(fare_media,x2019,x2018,x2017,x2016,x2015,x2014,x2013,x2012,x2011,x2010,x2009)
 
 ttc_clean_data[ttc_clean_data == "N/A"] <- "0"
 ```
 
-###ttc_clean_data[x2019 == "N/A",
-                 x2018 == "N/A",
-                 x2017 == "N/A",
-                 x2016 == "N/A",
-                 x2015 == "N/A",
-                 x2014 == "N/A",
-                 x2013 == "N/A",
-                 x2012 == "N/A",
-                 x2011 == "N/A",
-                 x2010 == "N/A",
-                 x2009 == "N/A"] <- "0"
+```{r data-for-paper, include=FALSE}
+presto_vs_ttc <- 
+  ttc_clean_data %>%
+  filter(fare_media %in% c("PRESTO - ADULT SINGLE RIDE",
+                           "CASH",
+                           "TOKENS",
+                           "TICKETS",
+                           "PRESTO - SENIOR SINGLE RIDE",
+                           "PRESTO - YOUTH SINGLE RIDE",
+                           "PRESTO - FREE CHILD RIDE"
+                               )
+         )
+```
                  
 ## Introduction
 There has been a rise of TTC fares and the usage of the TTC transit by Torontonians in the past decade, giving rise to contactless smart cards encrypted with NFC called the PRESTO card which allows riders to use the TTC without the need for any physical fares. PRESTO is a payment system that works across the city of Toronto for all transit systems to make the experience of a rider more secure and convenient to help them commute from one place to another. While TTC is one of the main ways for people to commute and travel across the city, it will be great to see what aspects of TTC are more prevalent in Torontonian’s riding experience. This will help hone onto a specific sector of TTC and help improve the experience further to lessen the pain for the TTC riders. 
@@ -73,12 +76,45 @@ The study focused on assessing the total number of sales for PRESTO, a digital p
 ## Model
 
 ```{r multiple-regression-model, include=TRUE}
-ttc_vs_presto_model <- 
-  lm(x2 ~ x3 + x4, 
-     data = ttc_clean_data)
-summary(ttc_vs_presto_model)
+#ttc_vs_presto_model <- 
+ # lm(x2019 ~ x1 + fare_media, data = ttc_clean_data)
+#summary(ttc_vs_presto_model)
 ```
 
+```{r table1, echo=FALSE}
+dffare <- data.frame(
+  fare = presto_vs_ttc$fare_media,
+  twenty_nineteen = presto_vs_ttc$x2019,
+  twenty_eighteen = presto_vs_ttc$x2018,
+  twenty_seventeen = presto_vs_ttc$x2017,
+  twenty_sixteen = presto_vs_ttc$x2016,
+  twenty_fifteen = presto_vs_ttc$x2015,
+  twenty_fourteen = presto_vs_ttc$x2014,
+  twenty_thirteen = presto_vs_ttc$x2013,
+  twenty_twelve = presto_vs_ttc$x2012,
+  twenty_eleven = presto_vs_ttc$x2011,
+  twenty_ten = presto_vs_ttc$x2010,
+  two_thousand_nine = presto_vs_ttc$x2009
+)
+knitr::kable(dffare, 
+             "simple",
+             col.names = c("Type of Fare", 
+                           "2019", 
+                           "2018", 
+                           "2017", 
+                           "2016", 
+                           "2015", 
+                           "2014", 
+                           "2013", 
+                           "2012",
+                           "2011",
+                           "2010",
+                           "2009"),
+             align = c("l","l","l","l","l","l","l","l","l","l","l","r"),
+             caption = "Population in Toronto Based on Age",
+             )#%>%
+  #aggregate(twenty_nineteen ~ fare, data = dffare, FUN = sum, na.rm = FALSE)
+```
 
 
 
