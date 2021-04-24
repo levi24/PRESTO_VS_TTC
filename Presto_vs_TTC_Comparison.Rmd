@@ -5,8 +5,8 @@ author: "Rachit Srivastava"
 date: "April 23rd, 2021"
 thanks: "Code and data are available at: https://github.com/levi24/PRESTO_VS_TTC"
 output:
-  pdf_document: default
-  html_document: default
+  bookdown::pdf_document2:
+    fig_caption: yes
 abstract: With the rapid increase in digital commodities and on-the-go customer experiences
   for TTC (Toronto Transit Commission) Transit riders, a study was conducted to see
   the shift in transit fare sales in the past decade between physical fares (i.e.
@@ -22,6 +22,13 @@ abstract: With the rapid increase in digital commodities and on-the-go customer 
   it comes to using the TTC, by using this insight the TTC can slowly transition into
   using PRESTO as their main source of selling fares while increasing the development
   of subways to cater to the needs of Toronto’s TTC riders.
+geometry: margin=0.75in
+header-includes:
+- \usepackage{float} #use the 'float' package
+- \floatplacement{figure}{H} #make every figure with caption = h
+- \usepackage{longtable} #Allowing for full tables and helping to format the paper
+toc: FALSE #Remove the table of contents
+bibliography: outputs/paper/references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -40,6 +47,7 @@ library(dplyr)
 library(kableExtra)
 library(ggplot2)
 library(plyr)
+library(bookdown)
 #library(gridExtra)
 ```
 
@@ -100,8 +108,18 @@ The paper will ignore the data around most of these types of fares except for th
 
 Lastly, the data that is presented in the dataset separates the different types of fares by age group (adult, senior, and youth). In order to see the full trajectory and comparison between the digital and physical fares of TTC in the past/recent decade, the data will need to be aggregated at the end to see a more visually accurate comparison of the types of fares.
 
-
 ## Results
+
+Based on the testing that was done as part of this paper by looking at the dataset for the TTC usage from 2009-2019, there could be a lot that can be derived from the tables and the charts detailed below. Some of these results include:
+
+• The sales for PRESTO has drastically increased in the recent decade, where it encompasses the majority of the sales in 2019. \
+• More than 50% of the sales are committed through digital fares for the TTC. \
+• The sales for physical fares in 2009 comprised more than 90% of the TTC fares. \
+• In 2009, the most common types of fares were cash and tickets that Torontonians use when riding on the TTC. \
+• In the recent decade, there was a visible decrease of physical fares and an increase in digital fares. \
+
+Most of these results are available to see in Table 1, which details the total number of sales in the thousandths for the different types of fares for every single year starting from 2009 to 2019. The usage of TTC by physical fares was on a rise in 2009 with over 120,000,000 (120 Million) sales through tokens alone, where sales through cash were over 45,000,000 (45 Million) and the sales through tickets were over 15,000,000 (15 Million). In total the physical sales in 2009 were over 180 Millions sales through physical fares. Conversely, when you look at Table 1 in 2019, the physical fares have decreased dramatically to only 60,000,000 (60 Million) sales in the year. Though 60 Million sales is a lot, that is a third of the sales of what it used to be a decade ago.
+
 ```{r table1, echo=FALSE}
 knitr::kable(presto_vs_ttc, 
              "latex", booktabs = T, 
@@ -123,6 +141,8 @@ knitr::kable(presto_vs_ttc,
   row_spec(0,bold=TRUE) %>% 
   kable_styling(full_width = F, latex_options = c("striped", "scale_down"))
 ```
+
+To elaborate further, the data for the cash has now been reversed a decade later where the digital fares (PRESTO) has taken the reins in achieving the most sales for the year of 2019. In 2019, the sales for adult usage of the TTC through PRESTO was over 166,00,000 (160 Million) and the total usage through PRESTO rose above 200,000,000 (200 Million) sales in the year. This number far exceeds the number of total physical fare sales in 2009 by a minimum of 20 Million sales. 
 
 ```{r pie-chart-2019, echo=FALSE, fig.cap="The figure shows the breakdown of the different types of TTC fares in the year 2019"}
 #Wanted to show a visual representation of the different types of fares in total for the most recent year in question (2019). Inside the pie chart, I wanted to show a percentage of data or the name of the type of fare on the pie chart but it did not work. To make it less confusing, I ended up making a more clear difference in the colours of the data.
