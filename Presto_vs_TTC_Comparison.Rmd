@@ -84,7 +84,7 @@ There has been a rise of TTC fares and the usage of the TTC transit by Torontoni
 The study focused on assessing the total number of sales for PRESTO, a digital payment system for quick fares, and total number of sales for physical fares, like cash, tokens, passes, or tickets, for Torontonians from 2009 - 2019. This study was conducted by looking at a TTC dataset obtained from the Toronto Open Data Portal, that focused on illustrating the information about the sales of the fares for both digital and physical assets as well as distinguishing the amount of fares for the types of transits that TTC offers. Since the study aimed to look into the trajectory of the sales from a large period of time, looking at the characteristics of the total number of sales per year seemed to be the most appropriate data to analyze for this study. By visualizing this data over a period of time, it gives us a great sense of how the ticket sales increased or decreased in a specific portion of the TTC ecosystem while identifying the main reasoning for that relationship. When comparing these variables, it shows that there is an increase in the usage of the TTC from 2009 - 2019, where the majority of those sales came from PRESTO sales and Rail transit sales. This further elaborates on the behaviour of Torontonians while using the TTC service and its products as they are more inclined to take a type of transit that is convenient, fast, efficient, and gets them to their destination without any hiccups. The TTC can use this knowledge to further push their agenda in strengthening that specific sector in their roadmap to improve the experience further so TTC riders continue to utilize their services according to their liking. 
 
 # Data
-The data discussed in this paper is extracted from the opendatatoronto portal and has been captured from 1985 to 2019. The matrix ecompasses the total number of TTC rides that a Torontotonian has made in all of those years, where the numbers detailed in each column is the total number of rides for that year under that specific “ride” category. The dataset has a wide variety of data like: 
+The data discussed in this paper is extracted from the opendatatoronto portal [@odt] and has been captured from 1985 to 2019. The matrix ecompasses the total number of TTC rides that a Torontotonian has made in all of those years, where the numbers detailed in each column is the total number of rides for that year under that specific “ride” category. The dataset has a wide variety of data like: 
 
 • type of fare(PRESTO, cash, tokens, tickets, passes, etc.), \
 • type of transit(subway, bus, and rail), \
@@ -188,10 +188,25 @@ This paper looked at the different types of fares that TTC riders use from a yea
 
 Also, moving forward it will be interesting to see what TTC introduces to the Toronto public in terms of either fares and see if this trajectory of digital fares tends to increase in the upcoming years. However, I am assuming that TTC sales have noticed a natural decline in sales due to the recent pandemic and will continue to see a decrease in sales until the pandemic is over. Once the pandemic is over, it can be assumed that people will start using more and more digital fares as compared to physical fares as we have seen an increase in distancing with human contact during the pandemic. So it feels like the PRESTO sales will continue to increase once the pandemic is over or may even notice a huge influx of sales due to the convenience of digital fares.
 
+\newpage
 
-# References
+# Footnote
+We analyzed the data using the language `R` [@citeR] by using `rStudio` [@citeLahman], where we installed packages to help assist our code such as: 
+
+• `tidyverse` [@citetidy], \
+• `dplyr` [@citedplyr], \
+• `janitor` [@citejanitor], \
+• `here` [@here], \
+• `readr` [@readr], \
+• `huxtable` [@hux], \
+• `kableExtra` [@ke], \
+• `here` [@here], \
+• `plyr` [@plyr], \
+
+Also, all of our graphs were plotted in the paper using `ggplot` [@citeggplot2].
 
 # Appendix
+
 
 ## All Pie Charts (2010 - 2018)
 Below is a list of pie charts for the other years if you want to see a more detailed view on all the years in between. Starting from 2018 to 2010.
@@ -345,3 +360,15 @@ I GIVE UP! I spent days in combining the data for cash, tickets, and tokens toge
   #two_thousand_nine = presto_vs_ttc$x2009
 #) 
 ```
+\newpage
+
+# References
+
+Yihui Xie (2021). bookdown: Authoring Books and Technical Documents with R Markdown. R package version 0.22.
+
+Yihui Xie (2021). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.32.
+
+Yihui Xie (2016). bookdown: Authoring Books and Technical Documents with R Markdown. Chapman and Hall/CRC. ISBN978-1138700109.
+
+Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Hall/CRC. ISBN 978-1498716963.
+
